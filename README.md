@@ -1,7 +1,7 @@
 - 👋 Hi, I’m @mahmoudxyz
-- 👀 I’m interested in Dart and Flutter
-- 🌱 I’m currently learning Dart,Flutter, Algorithms and DS
-- 💞️ I’m looking to collaborate on Dart package,plugin and projects 
+- 👀 I’m interested in Kotlin and Software
+- 🌱 I’m currently learning Kotlin, Android, Algorithms and DS
+- 💞️ I’m looking to collaborate on Kotlin and Android 
 - 📫 How to reach me mahmoudahmedxyz@gmail.com
 
 <!---
