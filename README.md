@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @mahmoudxyz
-- 👀 I’m interested in Kotlin and Software
-- 🌱 I’m currently learning Kotlin, Android, Algorithms and DS
+- 👀 I’m interested in Full-stack 
+- 🌱 I’m currently learning Spring boot, Front-end, Algorithms and DS
 - 💞️ I’m looking to collaborate on Kotlin and Android 
 - 📫 How to reach me mahmoudahmedxyz@gmail.com
 
