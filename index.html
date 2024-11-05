@@ -1,13 +1,128 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>Mahmoud Ahmed - Full Stack Software Engineer</title>
+    <meta name="title" content="Mahmoud Ahmed - Full Stack Software Engineer">
+    <meta name="description" content="Full Stack Software Engineer skilled in Java, JavaScript, React, AWS, and microservices. Currently working at N2N and technical writer at JetBrains Academy.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mahmoudahmed.dev/">
+    <meta property="og:title" content="Mahmoud Ahmed - Full Stack Software Engineer">
+    <meta property="og:description" content="Full Stack Software Engineer skilled in Java, JavaScript, React, AWS, and microservices. Currently working at N2N and technical writer at JetBrains Academy.">
+    <meta property="og:image" content="/thumbnail.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://mahmoudahmed.dev/">
+    <meta property="twitter:title" content="Mahmoud Ahmed - Full Stack Software Engineer">
+    <meta property="twitter:description" content="Full Stack Software Engineer skilled in Java, JavaScript, React, AWS, and microservices. Currently working at N2N and technical writer at JetBrains Academy.">
+    <meta property="twitter:image" content="/thumbnail.png">
+
+    <!-- Keywords -->
+    <meta name="keywords" content="Full Stack Developer, Software Engineer, Java, JavaScript, React, AWS, Spring Boot, Microservices, Technical Writer, N2N, JetBrains">
+
+    <!-- Author -->
+    <meta name="author" content="Mahmoud Ahmed">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#2563eb">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- PWA Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Mahmoud Ahmed">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mahmoud Ahmed",
+        "jobTitle": "Full Stack Software Engineer",
+        "url": "https://mahmoudahmed.dev",
+        "sameAs": [
+          "https://linkedin.com/in/mahmoud4dev",
+          "https://github.com/mahmoudxyz"
+        ],
+        "worksFor": {
+          "@type": "Organization",
+          "name": "N2N"
+        },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Kafr El Shiekh University"
+        },
+        "knowsAbout": [
+          "Java",
+          "JavaScript",
+          "React",
+          "AWS",
+          "Spring Boot",
+          "Microservices",
+          "Technical Writing"
+        ]
+      }
+    </script>
+
+    <!-- Analytics (Replace with your tracking ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/src/main.jsx" as="script">
+    <link rel="preload" href="/src/App.jsx" as="script">
+    <link rel="preload" href="/src/styles/main.css" as="style">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/src/styles/main.css">
   </head>
-  <body>
+  <body class="bg-gray-50 dark:bg-gray-900">
+    <noscript>
+      <div style="padding: 20px; text-align: center; font-family: system-ui, sans-serif;">
+        Please enable JavaScript to view this website.
+      </div>
+    </noscript>
+    
     <div id="root"></div>
+
+    <!-- Main Script -->
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Messaging Service Worker for PWA -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').then(registration => {
+            console.log('SW registered:', registration);
+          }).catch(error => {
+            console.log('SW registration failed:', error);
+          });
+        });
+      }
+    </script>
   </body>
 </html>
