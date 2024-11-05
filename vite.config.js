@@ -10,11 +10,25 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  publicDir: 'public',
+  server: {
+    port: 3000,
+    host: true,
+    strictPort: true,
+  },
+  preview: {
+    port: 3000,
+    host: true,
+    strictPort: true,
+  },
   build: {
+    outDir: 'dist',
+    sourcemap: true,
     rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html'),
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-router-dom', 'react-dom'],
+          // Add any other large dependencies here
+        },
       },
     },
   },
