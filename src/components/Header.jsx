@@ -54,7 +54,7 @@ const Header = () => {
   const { language } = useLanguage();
 
   const navigation = [
-    { name: language.code === 'en' ? 'RPG' : 'ار بي جي', href: '/rpg-preview' },
+    { name: language.code === 'en' ? 'Experience' : 'الخبرة العملية', href: '/experience' },
     { name: language.code === 'en' ? 'Blog' : 'المدونة', href: '/blog' },
     { name: language.code === 'en' ? 'Projects' : 'المشاريع', href: '/projects' },
   ];

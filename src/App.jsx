@@ -5,10 +5,11 @@ import BlogPage from './components/blog/BlogPage';
 import BlogPostPage from './components/blog/BlogPostPage';
 import { LanguageProvider } from './components/contexts/LanguageContext';
 import CharacterBuilder from './components/CharacterBuilder';
-import CharacterPreview from './components/CharacterPreview';
 import CharacterCreator from './components/CharacterCreator';
 import NotFound from './components/NotFound';
 import ScrollToTop from './components/ScrollToTop';
+import ExperiencePage from './pages/Experience';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
             <Routes>
               {/* Public routes */}
               <Route path="/" element={<LandingPage />} />
+              <Route path="/experience" element={<ExperiencePage />} />
+              <Route path="/contact" element={<ContactPage />} />
+
               
               {/* Blog routes */}
               <Route path="/blog" element={<BlogPage />} />
