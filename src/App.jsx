@@ -10,6 +10,7 @@ import NotFound from './components/NotFound';
 import ScrollToTop from './components/ScrollToTop';
 import ExperiencePage from './pages/Experience';
 import ContactPage from './pages/ContactPage';
+import VideoWatchPage from './pages/VideoWatchPage.jsx';
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
               <Route path="/experience" element={<ExperiencePage />} />
               <Route path="/contact" element={<ContactPage />} />
 
-              
+              <Route path="/watch" element={<VideoWatchPage />} />
+
               {/* Blog routes */}
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<BlogPostPage />} />
