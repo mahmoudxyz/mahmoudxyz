@@ -11,10 +11,14 @@ import ScrollToTop from './components/ScrollToTop';
 import ExperiencePage from './pages/Experience';
 import ContactPage from './pages/ContactPage';
 import VideoWatchPage from './pages/VideoWatchPage.jsx';
+import { GoalProvider } from './components/contexts/GoalContext.tsx';
+import GoalsPage from './pages/GoalsPage.jsx';
+
 
 function App() {
   return (
     <LanguageProvider>
+            <GoalProvider>
       <Router>
       <ScrollToTop />
         <div className="min-h-screen bg-background">
@@ -27,6 +31,8 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
 
               <Route path="/watch" element={<VideoWatchPage />} />
+
+              <Route path="/goals" element={<GoalsPage />} />
 
               {/* Blog routes */}
               <Route path="/blog" element={<BlogPage />} />
@@ -42,6 +48,7 @@ function App() {
           </main>
         </div>
       </Router>
+      </GoalProvider>
     </LanguageProvider>
   );
 }
