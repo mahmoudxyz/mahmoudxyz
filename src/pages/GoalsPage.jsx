@@ -235,7 +235,7 @@ const GoalsPage = () => {
       category: 'personal',
       title: "Make A FAMILY",
       description: "Focus on self-improvement and building healthy relationships",
-      status: 'in-progress',
+      status: 'on-hold',
       deadline: "No Deadline or Start time",
       milestones: [
         { text: "Find good wife", completed: false },
@@ -279,7 +279,7 @@ const GoalsPage = () => {
       category: 'financial',
       title: "Secure Purpose-Driven Income",
       description: "Find a position that provides both learning opportunities and the ability to make meaningful impact in medical/health tech",
-      status: 'in-progress',
+      status: 'on-hold',
       deadline: "2028-12-31",
       milestones: [
         { text: "Research biotech/healthtech companies and startups", completed: false },
