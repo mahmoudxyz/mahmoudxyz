@@ -305,7 +305,7 @@ const GoalsPage = () => {
       category: 'language',
       title: "Arabic Grammar (النحو)",
       description: "Master Arabic grammar from basics to advanced levels",
-      status: 'not-started',
+      status: 'in-progress',
       deadline: "2028-12-31",
       milestones: [
         // Year 1
@@ -327,7 +327,7 @@ const GoalsPage = () => {
       category: 'language',
       title: "Arabic Morphology (الصرف)",
       description: "Master word formation and morphological patterns",
-      status: 'not-started',
+      status: 'in-progress',
       deadline: "2028-12-31",
       milestones: [
         // Year 1
@@ -349,7 +349,7 @@ const GoalsPage = () => {
       category: 'language',
       title: "Arabic Rhetoric (البلاغة)",
       description: "Master the art of Arabic eloquence and style",
-      status: 'not-started',
+      status: 'in-progress',
       deadline: "2028-12-31",
       milestones: [
         // Year 1
@@ -371,7 +371,7 @@ const GoalsPage = () => {
       category: 'language',
       title: "Arabic Literature (الأدب)",
       description: "Study classical Arabic literature and poetry",
-      status: 'not-started',
+      status: 'in-progress',
       deadline: "2028-12-31",
       milestones: [
         // Year 1
@@ -393,7 +393,7 @@ const GoalsPage = () => {
       category: 'language',
       title: "Additional Sciences (العلوم المساعدة)",
       description: "Master supplementary Arabic sciences",
-      status: 'not-started',
+      status: 'in-progress',
       deadline: "2028-12-31",
       milestones: [
         // Logic (المنطق)
