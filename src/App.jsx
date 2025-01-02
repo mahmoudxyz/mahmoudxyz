@@ -13,6 +13,8 @@ import ContactPage from './pages/ContactPage';
 import VideoWatchPage from './pages/VideoWatchPage.jsx';
 import { GoalProvider } from './components/contexts/GoalContext.tsx';
 import GoalsPage from './pages/GoalsPage.jsx';
+import UniversityTracker from './pages/UniversitySearch.jsx';
+import UniversityFormPage from './pages/UniversityFormPage.jsx';
 
 
 function App() {
@@ -33,6 +35,9 @@ function App() {
               <Route path="/watch" element={<VideoWatchPage />} />
 
               <Route path="/goals" element={<GoalsPage />} />
+              <Route path="/uni" element={<UniversityTracker />} />
+              <Route path="/uni/create" element={<UniversityFormPage />} />
+
 
               {/* Blog routes */}
               <Route path="/blog" element={<BlogPage />} />
