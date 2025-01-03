@@ -16,7 +16,10 @@ import {
   Mail,
   X,
   Clock,
-  CalendarDays
+  CalendarDays,
+  Check,
+  Copy,
+  SquareSigma
 } from 'lucide-react';
 
 const UniversityTracker = () => {
@@ -248,7 +251,185 @@ const UniversityTracker = () => {
         },
         communications: [
         ]
+      },
+      {
+        id: 5,
+        name: 'University of Bonn',
+        country: 'germany',
+        city: 'Bonn',
+        program: 'Molecular Cell Biology, M.Sc.',
+        status: 'planning',
+        applicationFee: 0,
+        applicationVia: 'uni-bonn.de/en/studying/application-admission-and-enrollment/application-guide',
+        semesterFee: 330,
+        website: 'https://www.biologie.uni-bonn.de/de/studium/m-sc-mcb',
+        email: 'molcellbiol@uni-bonn.de',
+        starts:'2025-02-01',
+        deadline: '2025-03-31',
+        documents: [
+          { name: 'Transcript', status: 'ready', deadline: '2024-12-15' },
+          { name: 'CV', status: 'ready', deadline: '2024-12-15' },
+          { name: 'English B2', status: 'pending', deadline: '2025-2-15' },
+
+        ],
+        applicationDetails: {
+          appliedDate: '-',
+          applicationId: '-',
+          status: '-'
+        },
+        communications: [
+        ]
+      },
+      ,
+      {
+        id: 6,
+        name: 'University of Bonn',
+        country: 'germany',
+        city: 'Bonn',
+        program: 'Biochemistry, M.Sc.',
+        status: 'planning',
+        applicationFee: 0,
+        applicationVia: 'uni-bonn.de/en/studying/application-admission-and-enrollment/application-guide',
+        semesterFee: 330,
+        website: 'https://www.biologie.uni-bonn.de/de/studium/m-sc-mcb',
+        email: 'molcellbiol@uni-bonn.de',
+        starts:'NAN',
+        deadline: '2025-04-30',
+        documents: [
+          { name: 'Transcript', status: 'ready', deadline: '2024-12-15' },
+          { name: 'CV', status: 'ready', deadline: '2024-12-15' },
+          { name: 'English B2 Uni-certificate', status: 'ready', deadline: '2025-2-15' },
+          { name: 'aptitude test', status: 'pending', deadline: '2025-4-30' },
+
+        ],
+        applicationDetails: {
+          appliedDate: '-',
+          applicationId: '-',
+          status: '-'
+        },
+        communications: [
+        ]
       }
+      ,
+      {
+        id: 7,
+        name: 'Dresden University of Technology',
+        country: 'germany',
+        city: 'Dresden',
+        program: 'Biochemistry, M.Sc.',
+        status: 'planning',
+        applicationFee: 30,
+        applicationVia: 'uni-assist.de',
+        semesterFee: 290,
+        website: 'https://tu-dresden.de/studium/vor-dem-studium/studienangebot/sins/sins_studiengang?autoid=30058&set_language=en',
+        email: 'servicecenter.studium@tu-dresden.de',
+        starts:'2025-04-15',
+        deadline: '2025-06-15',
+        documents: [
+          { name: 'Transcript', status: 'ready', deadline: '2024-12-15' },
+          { name: 'CV', status: 'ready', deadline: '2024-12-15' },
+          { name: 'English B2 Uni-certificate', status: 'ready', deadline: '2025-2-15' },
+
+        ],
+        applicationDetails: {
+          appliedDate: '-',
+          applicationId: '-',
+          status: '-'
+        },
+        communications: [
+        ]
+      }
+      ,
+      {
+        id: 8,
+        name: 'University of Göttingen',
+        country: 'germany',
+        city: 'Göttingen',
+        program: 'Computational Biology and Bioinformatics, M.Sc.',
+        status: 'pending',
+        applicationFee: 0,
+        applicationVia: 'https://upload2.uni-goettingen.de/Bewerberportal/upload',
+        semesterFee: 400,
+        website: 'https://www.uni-goettingen.de/de/computational+biology+and+bioinformatics+%28m.sc.%29/657628.html',
+        email: 'studienberatung@biologie.uni-goettingen.de',
+        starts:'2025-01-1',
+        deadline: '2025-02-15',
+        documents: [
+          { name: 'Transcript', status: 'ready', deadline: '2024-12-15' },
+          { name: 'CV', status: 'ready', deadline: '2024-12-15' },
+          { name: 'English B2 Uni-certificate', status: 'ready', deadline: '2025-2-15' },
+          { name: 'content description', status: 'ready', deadline: '2025-2-15' },
+        ],
+        applicationDetails: {
+          appliedDate: '2025-01-3',
+          applicationId: '829-20252-1340',
+          status: 'issue_while_submit_documents'
+        },
+        communications: [
+          { date: '2025-01-03', type: 'submission', content: 'Application submitted' },
+          { date: '2025-01-03', type: 'email', content: 'Confirmation received asking to upload documents in portal' },
+          { date: '2025-01-03', type: 'email', content: 'document uploading failed' },
+          { date: '2025-01-03', type: 'email', content: 'send two emails about the document uploading failure' }
+        ]
+      }
+      ,
+      {
+        id: 9,
+        name: 'Saarland University',
+        country: 'germany',
+        city: 'Saarbrücken',
+        program: 'Computational Biology and Bioinformatics, M.Sc.',
+        status: 'applied',
+        applicationFee: 0,
+        applicationVia: 'https://oas.cs.uni-saarland.de/SubmitPaper.php',
+        semesterFee: 361.9,
+        website: 'https://www.uni-saarland.de/en/study/programmes/master/bioinformatics.html',
+        email: 'olga.Kalinina(at)helmholtz-hips.de',
+        starts:'2025-01-1',
+        deadline: '2025-5-15',
+        documents: [
+          { name: 'Transcript', status: 'ready', deadline: '2024-12-15' },
+          { name: 'CV', status: 'ready', deadline: '2024-12-15' },
+          { name: 'Motivation letter', status: 'ready', deadline: '2024-12-15' },
+          { name: 'English C1', status: 'ready', deadline: '2024-12-15' },
+          { name: 'Two recommendation letters/Ash-Ade', status: 'pending', deadline: '2025-5-01' },
+        ],
+        applicationDetails: {
+          appliedDate: '2025-01-3',
+          applicationId: 'NaN',
+          status: 'under_review'
+        },
+        communications: [
+          { date: '2025-01-03', type: 'submission', content: 'Documents uploaded waiting references' },
+          { date: '2025-01-03', type: 'email', content: 'send email seeking clarifications' }
+        ]
+      }
+      ,
+      {
+        id: 10,
+        name: 'Heinrich Heine University Düsseldorf',
+        country: 'germany',
+        city: 'Düsseldorf',
+        program: 'Biochemistry International, M.Sc.',
+        status: 'planning',
+        applicationFee: 0,
+        applicationVia: 'https://digstu.hhu.de/qisserver/pages/cs/sys/portal/hisinoneStartPage.faces',
+        semesterFee: 300,
+        website: 'https://www.biochemiestudium.hhu.de/en/translate-to-english-biochemistry-international',
+        email: 'StuKoBiochemie@hhu.de',
+        starts:'2025-08-1',
+        deadline: '2025-9-15',
+        documents: [
+          { name: 'Graduation Certificate', status: 'pending', deadline: '2025-9-1' },
+        ],
+        applicationDetails: {
+          appliedDate: '2025-01-3',
+          applicationId: 'NaN',
+          status: ''
+        },
+        communications: [        ]
+      }
+      
       
 
   ];
@@ -283,7 +464,8 @@ const UniversityTracker = () => {
         applied: universities.filter(u => u.status === 'applied').length,
         accepted: universities.filter(u => u.status === 'accepted').length,
         rejected: universities.filter(u => u.status === 'rejected').length,
-        pending: universities.filter(u => u.status === 'pending').length
+        pending: universities.filter(u => u.status === 'pending').length,
+        planning: universities.filter(u => u.status === 'planning').length
       },
       documents: {
         ready: universities.reduce((acc, uni) => 
@@ -307,7 +489,21 @@ const UniversityTracker = () => {
           {/* Application Stats Card */}
           <div className="bg-white rounded-2xl shadow-sm p-6">
             <h3 className="text-lg font-semibold mb-4">Applications</h3>
+            
             <div className="grid grid-cols-2 gap-4">
+            <div className="flex items-center gap-2">
+                <div className="p-2 bg-blue-50 rounded-lg">
+                  <SquareSigma className="h-5 w-5 text-black-500" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Total</p>
+                  <p className="text-xl font-bold text-black-600">
+                    {stats.applications.applied + stats.applications.rejected + stats.applications.planning
+                    + stats.applications.pending}
+                  </p>
+                </div>
+              </div>
+
               <div className="flex items-center gap-2">
                 <div className="p-2 bg-blue-50 rounded-lg">
                   <Clock4 className="h-5 w-5 text-blue-500" />
@@ -317,6 +513,7 @@ const UniversityTracker = () => {
                   <p className="text-xl font-bold text-blue-600">{stats.applications.applied}</p>
                 </div>
               </div>
+
               <div className="flex items-center gap-2">
                 <div className="p-2 bg-green-50 rounded-lg">
                   <CheckCircle2 className="h-5 w-5 text-green-500" />
@@ -629,11 +826,14 @@ const UniversityTracker = () => {
                           .sort((a, b) => a.semesterFee - b.semesterFee)
                           .map(uni => (
                             <div key={uni.id} className="flex items-center gap-2">
+                              {
+                              console.log(uni.semesterFee)
+                              }
                               <div 
                                 className="bg-purple-100 h-6 rounded"
                                 style={{ 
-                                  width: `${(uni.semesterFee / Math.max(...universities.map(u => u.semesterFee))) * 100}%`,
-                                  minWidth: '20px'
+                                  
+                                  minWidth: `${(uni.semesterFee + 15) / 10}%`
                                 }}
                               />
                               <span className="text-gray-600 min-w-[200px]">{uni.name}</span>
@@ -722,8 +922,8 @@ const UniversityTracker = () => {
           </div>
         </div>
 
-{/* Universities Grid */}
-<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+      {/* Universities Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {universities
             .filter(uni => {
               const matchesSearch = uni.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -769,14 +969,23 @@ const UniversityTracker = () => {
                       <span className="text-sm text-gray-600">Application Fee</span>
                       <span className="font-medium">€{uni.applicationFee}</span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">Application Via</span>
-                      <span className="font-medium">{uni.applicationVia}</span>
+
+                    <div className="space-y-4">
+                      <CopyableField
+                        label="Application Via"
+                        value={uni.applicationVia}
+                      />
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-600">Semester Fee</span>
                       <span className="font-medium">€{uni.semesterFee}</span>
                     </div>
+
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Application opens in</span>
+                      <span className="font-medium">{uni.starts}</span>
+                    </div>
+
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-600">Deadline</span>
                       <span className="font-medium">{uni.deadline}</span>
@@ -897,3 +1106,43 @@ const UniversityTracker = () => {
 };
 
 export default UniversityTracker;
+
+
+const CopyableField = ({ label, value }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy text:', err);
+    }
+  };
+
+  return (
+    <div className="flex justify-between items-center">
+      <span className="text-sm text-gray-600">{label}</span>
+      <div className="flex items-center gap-2">
+        {copied ? (
+          <div className="flex items-center gap-1 text-green-500">
+            <Check className="w-4 h-4" />
+            <span className="font-medium">Copied!</span>
+          </div>
+        ) : (
+          <div className="flex items-center gap-2 hover:bg-gray-100">
+          <span 
+            onClick={handleCopy}
+            className="font-medium  cursor-pointer rounded px-2 py-1 transition-colors"
+          >
+            Click to copy
+          </span>
+          <Copy className="w-4 h-4 cursor-pointer" />
+      </div>
+
+        )}
+      </div>
+    </div>
+  );
+};
