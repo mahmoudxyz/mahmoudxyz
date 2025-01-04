@@ -1,6 +1,6 @@
-// components/auth/LoginPage.jsx
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { encryptToken } from '../../utils/encryption';
 
 const LoginPage = () => {
   const [password, setPassword] = useState('');
@@ -12,10 +12,14 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Check against environment variable
+    
     if (password === import.meta.env.VITE_APP_PASSWORD) {
-      // Store in sessionStorage so it persists during the session
-      sessionStorage.setItem('isAuthenticated', 'true');
+      // Generate encrypted token
+      const token = encryptToken(password);
+      
+      // Store encrypted token
+      sessionStorage.setItem('authToken', token);
+      
       navigate(from, { replace: true });
     } else {
       setError('Invalid password');

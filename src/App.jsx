@@ -17,63 +17,67 @@ import UniversityTracker from './pages/UniversitySearch.jsx';
 import UniversityFormPage from './pages/UniversityFormPage.jsx';
 import LoginPage from './components/auth/LoginPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
+import { useAuth } from './hooks/useAuth';
+
+const AuthWrapper = ({ children }) => {
+  useAuth(); // This will check token validity periodically
+  return children;
+};
 
 function App() {
   return (
     <LanguageProvider>
       <GoalProvider>
         <Router>
-          <ScrollToTop />
-          <div className="min-h-screen bg-background">
-            <Header />
-            <main className="container mx-auto px-4 py-8">
-              <Routes>
-                {/* Public routes */}
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/experience" element={<ExperiencePage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/watch" element={<VideoWatchPage />} />
-                <Route path="/login" element={<LoginPage />} />
+          <AuthWrapper>
+            <ScrollToTop />
+            <div className="min-h-screen bg-background">
+              <Header />
+              <main className="container mx-auto px-4 py-8">
+                <Routes>
+                  {/* Public routes */}
+                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/experience" element={<ExperiencePage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/watch" element={<VideoWatchPage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/blog" element={<BlogPage />} />
+                  <Route path="/blog/:slug" element={<BlogPostPage />} />
+                  <Route path="/rpg" element={<CharacterBuilder />} />
+                  <Route path="/rpg-preview" element={<CharacterCreator />} />
 
-                {/* Protected routes */}
-                <Route
-                  path="/goals"
-                  element={
-                    <ProtectedRoute>
-                      <GoalsPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/uni"
-                  element={
-                    <ProtectedRoute>
-                      <UniversityTracker />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/uni/create"
-                  element={
-                    <ProtectedRoute>
-                      <UniversityFormPage />
-                    </ProtectedRoute>
-                  }
-                />
+                  {/* Protected routes */}
+                  <Route
+                    path="/goals"
+                    element={
+                      <ProtectedRoute>
+                        <GoalsPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/uni"
+                    element={
+                      <ProtectedRoute>
+                        <UniversityTracker />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/uni/create"
+                    element={
+                      <ProtectedRoute>
+                        <UniversityFormPage />
+                      </ProtectedRoute>
+                    }
+                  />
 
-                {/* Blog routes */}
-                <Route path="/blog" element={<BlogPage />} />
-                <Route path="/blog/:slug" element={<BlogPostPage />} />
-                
-                {/* RPG routes */}
-                <Route path="/rpg" element={<CharacterBuilder />} />
-                <Route path="/rpg-preview" element={<CharacterCreator />} />
-                
-                {/* Catch all route */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
-          </div>
+                  {/* Catch all route */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </main>
+            </div>
+          </AuthWrapper>
         </Router>
       </GoalProvider>
     </LanguageProvider>
