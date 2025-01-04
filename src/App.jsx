@@ -15,44 +15,66 @@ import { GoalProvider } from './components/contexts/GoalContext.tsx';
 import GoalsPage from './pages/GoalsPage.jsx';
 import UniversityTracker from './pages/UniversitySearch.jsx';
 import UniversityFormPage from './pages/UniversityFormPage.jsx';
-
+import LoginPage from './components/auth/LoginPage';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 function App() {
   return (
     <LanguageProvider>
-            <GoalProvider>
-      <Router>
-      <ScrollToTop />
-        <div className="min-h-screen bg-background">
-          <Header />
-          <main className="container mx-auto px-4 py-8">
-            <Routes>
-              {/* Public routes */}
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/experience" element={<ExperiencePage />} />
-              <Route path="/contact" element={<ContactPage />} />
+      <GoalProvider>
+        <Router>
+          <ScrollToTop />
+          <div className="min-h-screen bg-background">
+            <Header />
+            <main className="container mx-auto px-4 py-8">
+              <Routes>
+                {/* Public routes */}
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/experience" element={<ExperiencePage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/watch" element={<VideoWatchPage />} />
+                <Route path="/login" element={<LoginPage />} />
 
-              <Route path="/watch" element={<VideoWatchPage />} />
+                {/* Protected routes */}
+                <Route
+                  path="/goals"
+                  element={
+                    <ProtectedRoute>
+                      <GoalsPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/uni"
+                  element={
+                    <ProtectedRoute>
+                      <UniversityTracker />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/uni/create"
+                  element={
+                    <ProtectedRoute>
+                      <UniversityFormPage />
+                    </ProtectedRoute>
+                  }
+                />
 
-              <Route path="/goals" element={<GoalsPage />} />
-              <Route path="/uni" element={<UniversityTracker />} />
-              <Route path="/uni/create" element={<UniversityFormPage />} />
-
-
-              {/* Blog routes */}
-              <Route path="/blog" element={<BlogPage />} />
-              <Route path="/blog/:slug" element={<BlogPostPage />} />
-              
-              {/* RPG routes */}
-              <Route path="/rpg" element={<CharacterBuilder />} />
-              <Route path="/rpg-preview" element={<CharacterCreator />} />
-              
-              {/* Catch all route */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-        </div>
-      </Router>
+                {/* Blog routes */}
+                <Route path="/blog" element={<BlogPage />} />
+                <Route path="/blog/:slug" element={<BlogPostPage />} />
+                
+                {/* RPG routes */}
+                <Route path="/rpg" element={<CharacterBuilder />} />
+                <Route path="/rpg-preview" element={<CharacterCreator />} />
+                
+                {/* Catch all route */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+          </div>
+        </Router>
       </GoalProvider>
     </LanguageProvider>
   );
