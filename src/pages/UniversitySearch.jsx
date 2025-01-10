@@ -428,7 +428,37 @@ const UniversityTracker = () => {
           status: ''
         },
         communications: [        ]
-      }
+      },
+      {
+        id: 11,
+        name: 'Universita\' di Genova',
+        country: 'italy',
+        city: 'Genova',
+        program: 'MEDICAL-PHARMACEUTICAL BIOTECHNOLOGY, M.Sc.',
+        status: 'applied',
+        applicationFee: 0,
+        applicationVia: 'https://servizionline.unige.it/web-studenti2/en/#/v2/preimma/td/5005/anac/2025',
+        email: 'enrico.zeraschi@unige.it',
+        website: 'https://corsi.unige.it/en/corsi/10598/',
+        semesterFee: 300,
+        deadline: '2025-03-14',
+        starts:  '2025-11-18',
+        documents: [
+          { name: 'Transcript', status: 'ready', deadline: '2024-12-15' },
+          { name: 'CV', status: 'ready', deadline: '2024-12-15' },
+          { name: 'Motivation Letter', status: 'ready', deadline: '2024-12-15' },
+          { name: 'English C1', status: 'ready', deadline: '2024-12-15' }
+        ],
+        applicationDetails: {
+          appliedDate: '2025-01-10',
+          applicationId: '8282110',
+          status: 'under_review'
+        },
+        communications: [
+          { date: '2025-01-10', type: 'submission', content: 'Application submitted' },
+          { date: '2025-01-10', type: 'email', content: 'Confirmation received' }
+        ]
+      },
       
       
 
@@ -478,7 +508,8 @@ const UniversityTracker = () => {
         { title: 'Language', content: 'B2 Italian or English (program specific)' },
         { title: 'Visa Cost', content: '€50' }
       ]
-    }
+    },
+    
 };
 
   // Calculate statistics
