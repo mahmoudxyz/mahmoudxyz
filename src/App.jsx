@@ -19,6 +19,8 @@ import LoginPage from './components/auth/LoginPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { useAuth } from './hooks/useAuth';
 import { HelmetProvider } from 'react-helmet-async';
+import MarkdownEditor from './components/blog/MarkdownEditor.jsx';
+import '@fontsource/noto-sans-arabic/400.css';
 
 const AuthWrapper = ({ children }) => {
   useAuth(); // This will check token validity periodically
@@ -46,6 +48,8 @@ function App() {
                   <Route path="/login" element={<LoginPage />} />
 
                   <Route path="/blog" element={<BlogPage />} />
+                  <Route path="/blog/editor" element={<MarkdownEditor />} />
+
                   <Route path="/blog/:slug" element={<BlogPostPage />} />
 
                   <Route path="/rpg" element={<CharacterBuilder />} />
