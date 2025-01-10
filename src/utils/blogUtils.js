@@ -101,4 +101,40 @@ const generateTableOfContents = (content) => {
   return headings;
 };
 
-export { getPosts, getPost };
+// Add this to your existing blogUtils.js file
+
+export const checkAvailableLanguages = async (baseSlug) => {
+  const languages = ['en', 'ar', 'de', 'cz'];
+  const availableLanguages = ['en']; // English is always available as base
+
+  try {
+    // Check each language version
+    for (const lang of languages) {
+      if (lang === 'en') continue; // Skip English as it's the base
+      
+      const langSlug = `${baseSlug}-${lang}`;
+      const exists = await checkPostExists(langSlug); // You'll need to implement this based on your data fetching method
+      
+      if (exists) {
+        availableLanguages.push(lang);
+      }
+    }
+    
+    return availableLanguages;
+  } catch (error) {
+    console.error('Error checking available languages:', error);
+    return ['en']; // Return only English if there's an error
+  }
+};
+
+// Helper function to check if a post exists
+const checkPostExists = async (slug) => {
+  try {
+    const post = await getPost(slug);
+    return !!post;
+  } catch {
+    return false;
+  }
+};
+
+export { getPosts, getPost, checkPostExists };

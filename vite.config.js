@@ -28,8 +28,25 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-router-dom', 'react-dom'],
           // Add any other large dependencies here
+          ui: [
+            '@headlessui/react',
+            'lucide-react',
+            'framer-motion',
+            'react-helmet-async'
+          ],
+          utils: [
+            'date-fns',
+            'lodash',
+          ],
         },
       },
     },
+  },
+  define: {
+    // Ensure process.env is available in development
+    'process.env': {
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      VITE_BASE_URL: JSON.stringify(process.env.VITE_BASE_URL),
+    }
   },
 });

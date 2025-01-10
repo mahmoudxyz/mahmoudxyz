@@ -446,8 +446,40 @@ const UniversityTracker = () => {
         { title: 'Visa Cost', content: '€75' }
       ]
     },
-    // Add other countries...
-  };
+    austria: {
+      name: 'Austria',
+      icon: '🇦🇹',
+      keyFacts: [
+        { title: 'Application Period', content: 'Winter: Jan-Mar, Summer: Jul-Sep' },
+        { title: 'Blocked Account', content: '€11,928 (2024)' },
+        { title: 'Health Insurance', content: '~€65/month' },
+        { title: 'Language', content: 'B2 German or English (program dependent)' },
+        { title: 'Visa Cost', content: '€160' }
+      ]
+    },
+    russia: {
+      name: 'Russia',
+      icon: '🇷🇺',
+      keyFacts: [
+        { title: 'Application Period', content: 'Jun-Jul for most universities' },
+        { title: 'Financial Proof', content: '~€3,000/year' },
+        { title: 'Health Insurance', content: '€150-200/year' },
+        { title: 'Language', content: 'B2 Russian or English (varies by program)' },
+        { title: 'Visa Cost', content: '€35' }
+      ]
+    },
+    italy: {
+      name: 'Italy',
+      icon: '🇮🇹',
+      keyFacts: [
+        { title: 'Application Period', content: 'Early Bird: Feb-Apr, Regular: May-Jul' },
+        { title: 'Financial Proof', content: '€6,079.45/year (2024)' },
+        { title: 'Health Insurance', content: '€150/year' },
+        { title: 'Language', content: 'B2 Italian or English (program specific)' },
+        { title: 'Visa Cost', content: '€50' }
+      ]
+    }
+};
 
   // Calculate statistics
   const stats = useMemo(() => {
@@ -903,6 +935,8 @@ const UniversityTracker = () => {
                 <option value="germany">Germany</option>
                 <option value="italy">Italy</option>
                 <option value="austria">Austria</option>
+                <option value="russia">Russia</option>
+
               </select>
               <select 
                 className="px-4 py-3 border rounded-lg bg-gray-50 min-w-[150px]"

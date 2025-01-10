@@ -1,39 +1,35 @@
-// src/contexts/LanguageContext.jsx
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
+
+const defaultLanguage = {
+  code: 'en',
+  name: 'English',
+  flag: '🇬🇧',
+  dir: 'ltr'
+};
 
 const LanguageContext = createContext();
 
-export const languages = {
-  en: {
-    code: 'en',
-    dir: 'ltr',
-    name: 'English'
-  },
-  ar: {
-    code: 'ar',
-    dir: 'rtl',
-    name: 'العربية'
-  }
-};
+export const LanguageProvider = ({ children }) => {
+  const [language, setLanguage] = useState(defaultLanguage);
 
-export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState(languages.en);
-
-  useEffect(() => {
-    // Set direction on html element
-    document.documentElement.dir = language.dir;
-    document.documentElement.lang = language.code;
-  }, [language]);
-
-  const toggleLanguage = () => {
-    setLanguage(prev => prev.code === 'en' ? languages.ar : languages.en);
+  const value = {
+    language,
+    setLanguage
   };
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );
-}
+};
 
-export const useLanguage = () => useContext(LanguageContext);
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
+};
+
+export default LanguageContext;

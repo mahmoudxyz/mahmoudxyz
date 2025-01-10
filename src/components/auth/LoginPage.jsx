@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Shield, Key, GamepadIcon, Wand2, Lock, Unlock, X } from 'lucide-react';
+import { Shield, GamepadIcon, Wand2, Lock, Unlock, X } from 'lucide-react';
 import { encryptToken } from '../../utils/encryption';
 
 const PlayfulLogin = () => {
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [showGame, setShowGame] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [isShaking, setIsShaking] = useState(false);
@@ -178,4 +177,3 @@ const PlayfulLogin = () => {
 
 export default PlayfulLogin;
 
-// Add these animations to your tailwind.config.js

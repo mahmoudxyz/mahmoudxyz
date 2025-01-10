@@ -1,33 +1,36 @@
-// src/pages/Blog/BlogPage.jsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Clock, Tag } from 'lucide-react';
-import SearchBar from './SearchBar';
-import CategoryFilter from './CategoryFilter';
-import Pagination from './Pagination';
+import { Calendar, Clock, Tag, Search, X, ChevronRight, Terminal, Laptop2, Code2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getPosts } from '../../utils/blogUtils';
 import { formatDate } from '../../utils/dateFormat';
 import { getTranslation } from '../../utils/translations';
+import PostGrid from './PostGrid';
 
-const POSTS_PER_PAGE = 9;
+const POSTS_PER_PAGE = 6; // Reduced for better visual layout
 
 const BlogPage = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const { language } = useLanguage();
   const t = (key) => getTranslation(language, `blog.${key}`);
-
 
   useEffect(() => {
     const loadPosts = async () => {
       try {
         const allPosts = await getPosts();
-        setPosts(allPosts);
+        // Filter posts based on current language
+        const languagePosts = allPosts.filter(post => {
+          if (language.code === 'en') {
+            return !post.slug.includes('-ar') && !post.slug.includes('-de') && !post.slug.includes('-cz');
+          }
+          return post.slug.includes(`-${language.code}`);
+        });
+        setPosts(languagePosts);
       } catch (err) {
         setError('Failed to load blog posts');
         console.error('Error loading posts:', err);
@@ -37,27 +40,24 @@ const BlogPage = () => {
     };
 
     loadPosts();
-  }, []);
+  }, [language]);
 
-  // Reset page when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, selectedCategory]);
+  }, [searchTerm, selectedCategories]);
 
-  // Get unique categories from all posts
   const categories = [...new Set(posts.flatMap(post => post.categories))];
 
-  // Filter posts
   const filteredPosts = posts
     .filter(post => 
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.description.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .filter(post => 
-      selectedCategory ? post.categories.includes(selectedCategory) : true
+      selectedCategories.length === 0 || 
+      selectedCategories.some(cat => post.categories.includes(cat))
     );
 
-  // Paginate posts
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
   const paginatedPosts = filteredPosts.slice(
     (currentPage - 1) * POSTS_PER_PAGE,
@@ -67,125 +67,118 @@ const BlogPage = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-4 py-16 text-center">
-          <div className="animate-pulse">
-            <div className="h-8 bg-muted rounded w-1/4 mx-auto mb-4"></div>
-            <div className="h-4 bg-muted rounded w-2/4 mx-auto"></div>
+        <div className="container mx-auto px-4 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="rounded-xl border p-6 animate-pulse">
+                <div className="h-4 bg-muted rounded w-1/4 mb-4"></div>
+                <div className="h-6 bg-muted rounded w-3/4 mb-3"></div>
+                <div className="h-4 bg-muted rounded w-full mb-2"></div>
+                <div className="h-4 bg-muted rounded w-2/3"></div>
+              </div>
+            ))}
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-4 py-16 text-center">
-          <h2 className="text-xl font-semibold text-destructive mb-2">{error}</h2>
-          <p className="text-muted-foreground">Please try again later.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className={`min-h-screen bg-background ${language.dir === 'rtl' ? 'dir-rtl' : 'dir-ltr'}`}>
-      {/* Hero Section */}
-      <div className="border-b">
-        <div className="container mx-auto px-4 py-16 md:py-24">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('title')}</h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-            {t('description')}
-          </p>
+    <div className="min-h-screen bg-background" dir={language.code === 'ar' ? 'rtl' : 'ltr'}>
+      {/* Hero Section with Gradient */}
+      <div className="relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-grid-slate-100/50 [mask-image:linear-gradient(0deg,transparent,black)] dark:bg-grid-slate-700/25" />
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background" />
+        
+        {/* Floating Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -right-4 top-1/4 w-24 h-24 bg-primary/10 rounded-full blur-2xl animate-pulse" />
+          <div className="absolute left-1/4 top-1/3 w-32 h-32 bg-secondary/10 rounded-full blur-2xl animate-pulse delay-300" />
+          <div className="absolute right-1/3 bottom-1/4 w-40 h-40 bg-accent/10 rounded-full blur-2xl animate-pulse delay-700" />
         </div>
-      </div>
 
-      {/* Filters */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row gap-4 md:items-center">
-          <div className="w-full md:w-64">
-            <SearchBar 
-              searchTerm={searchTerm} 
-              onSearch={setSearchTerm}
-              placeholder={t('searchPlaceholder')}
-            />
+        <div className="container mx-auto px-4 relative">
+          <div className="py-24 md:py-32 max-w-6xl mx-auto">
+            {/* Feature Icons */}
+            <div className="flex justify-center gap-8 mb-8">
+              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <Terminal className="w-4 h-4" />
+                <span>Development</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <Code2 className="w-4 h-4" />
+                <span>Engineering</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <Laptop2 className="w-4 h-4" />
+                <span>Technology</span>
+              </div>
+            </div>
+
+            {/* Main Title Group */}
+            <div className="text-center space-y-8">
+              
+              <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                {t('description')}
+              </p>
+
+              {/* Quick Stats */}
+              <div className="flex justify-center gap-8 pt-8">
+                <div className="flex flex-col items-center">
+                  <span className="text-3xl font-bold text-primary">{posts.length}</span>
+                  <span className="text-sm text-muted-foreground">Articles</span>
+                </div>
+                <div className="w-px h-12 bg-border" />
+                <div className="flex flex-col items-center">
+                  <span className="text-3xl font-bold text-primary">{categories.length}</span>
+                  <span className="text-sm text-muted-foreground">Categories</span>
+                </div>
+                <div className="w-px h-12 bg-border" />
+                <div className="flex flex-col items-center">
+                  <span className="text-3xl font-bold text-primary">
+                    {Math.ceil(posts.reduce((acc, post) => acc + post.readingTime, 0) / 60)}
+                  </span>
+                  <span className="text-sm text-muted-foreground">Hours of Reading</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Search Bar */}
+            <div className="relative max-w-2xl mx-auto mt-12">
+              <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 blur-xl" />
+              <div className="relative flex items-center bg-background/80 backdrop-blur-sm rounded-2xl border shadow-lg">
+                <Search className="absolute left-4 h-5 w-5 text-muted-foreground" />
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder={t('searchPlaceholder')}
+                  className="w-full pl-12 pr-4 py-4 bg-transparent rounded-2xl focus:outline-none focus:ring-2 
+                           focus:ring-primary/20 transition-all text-foreground placeholder:text-muted-foreground"
+                />
+              </div>
+            </div>
           </div>
-          <CategoryFilter
-            categories={categories}
-            selected={selectedCategory}
-            onChange={setSelectedCategory}
-          />
         </div>
+
+        {/* Bottom Fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </div>
 
-       {/* Posts Grid */}
-       <div className="container mx-auto px-4 py-8">
-        {paginatedPosts.length === 0 ? (
-          <div className="text-center py-12">
-            <h3 className="text-lg font-medium mb-2">{t('noResults')}</h3>
-            <p className="text-muted-foreground">
-              {t('noResultsDesc')}
-            </p>
-          </div>
-        ) : (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {paginatedPosts.map((post) => (
-              <article 
-                key={post.slug}
-                className="group flex flex-col rounded-lg border bg-card hover:bg-card/50 transition-colors p-6"
-              >
-                {/* Categories */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {post.categories?.map((category) => (
-                    <span
-                      key={category}
-                      className="inline-flex items-center text-xs font-medium px-2 py-1 rounded-full bg-primary/10 text-primary"
-                    >
-                      <Tag className={`w-3 h-3 ${language.dir === 'rtl' ? 'ml-1' : 'mr-1'}`} />
-                      {category}
-                    </span>
-                  ))}
-                </div>
+{console.log(paginatedPosts)}
 
-                {/* Title */}
-                <h2 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
-                  <Link to={`/blog/${post.slug}`} className="hover:underline">
-                    {post.title}
-                  </Link>
-                </h2>
-
-                {/* Description */}
-                <p className="text-muted-foreground mb-4 line-clamp-2">
-                  {post.description}
-                </p>
-
-                {/* Metadata */}
-                <div className="mt-auto flex items-center gap-4 text-sm text-muted-foreground">
-                  <span className="flex items-center">
-                    <Calendar className={`w-4 h-4 ${language.dir === 'rtl' ? 'ml-1' : 'mr-1'}`} />
-                    {formatDate(post.date, language.code)}
-                  </span>
-                  <span className="flex items-center">
-                    <Clock className={`w-4 h-4 ${language.dir === 'rtl' ? 'ml-1' : 'mr-1'}`} />
-                    {post.readingTime} {t('readingTime')}
-                  </span>
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
-
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="mt-12">
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
-          </div>
-        )}
-      </div>
+      <PostGrid
+            paginatedPosts={paginatedPosts}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            setCurrentPage={setCurrentPage}
+            t={t}
+            language={language}
+            formatDate={formatDate}
+    />
 
     </div>
   );

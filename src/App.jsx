@@ -18,6 +18,7 @@ import UniversityFormPage from './pages/UniversityFormPage.jsx';
 import LoginPage from './components/auth/LoginPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { useAuth } from './hooks/useAuth';
+import { HelmetProvider } from 'react-helmet-async';
 
 const AuthWrapper = ({ children }) => {
   useAuth(); // This will check token validity periodically
@@ -26,8 +27,10 @@ const AuthWrapper = ({ children }) => {
 
 function App() {
   return (
+    <HelmetProvider>
     <LanguageProvider>
       <GoalProvider>
+      <LanguageProvider>
         <Router>
           <AuthWrapper>
             <ScrollToTop />
@@ -41,8 +44,10 @@ function App() {
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/watch" element={<VideoWatchPage />} />
                   <Route path="/login" element={<LoginPage />} />
+
                   <Route path="/blog" element={<BlogPage />} />
                   <Route path="/blog/:slug" element={<BlogPostPage />} />
+
                   <Route path="/rpg" element={<CharacterBuilder />} />
                   <Route path="/rpg-preview" element={<CharacterCreator />} />
 
@@ -79,8 +84,11 @@ function App() {
             </div>
           </AuthWrapper>
         </Router>
+        </LanguageProvider>
       </GoalProvider>
     </LanguageProvider>
+        </HelmetProvider>
+
   );
 }
 
