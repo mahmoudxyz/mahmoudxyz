@@ -442,7 +442,7 @@ const UniversityTracker = () => {
         website: 'https://corsi.unige.it/en/corsi/10598/',
         semesterFee: 300,
         deadline: '2025-03-14',
-        starts:  '2025-11-18',
+        starts:  '2024-11-18',
         documents: [
           { name: 'Transcript', status: 'ready', deadline: '2024-12-15' },
           { name: 'CV', status: 'ready', deadline: '2024-12-15' },
@@ -459,6 +459,36 @@ const UniversityTracker = () => {
           { date: '2025-01-10', type: 'email', content: 'Confirmation received' }
         ]
       },
+      {
+        id: 12,
+        name: 'Universita di Bologna',
+        country: 'italy',
+        city: 'Bologna',
+        program: 'Bioinformatics, M.Sc.',
+        status: 'applied',
+        applicationFee: 0,
+        applicationVia: 'https://studenti.unibo.it/sol/welcome.htm?siteLanguage=en',
+        email: 'enrico.zeraschi@unige.it',
+        website: 'https://corsi.unibo.it/2cycle/Bioinformatics/overview',
+        semesterFee: 500,
+        deadline: '2025-01-29',
+        starts:  '2024-12-19',
+        documents: [
+          { name: 'Transcript', status: 'ready', deadline: '2024-12-15' },
+          { name: 'CV', status: 'ready', deadline: '2024-12-15' },
+          { name: 'English C1', status: 'ready', deadline: '2024-12-15' }
+        ],
+        applicationDetails: {
+          appliedDate: '2025-1-11',
+          applicationId: '3495223',
+          status: 'under_review'
+        },
+        communications: [
+          { date: '2025-01-10', type: 'submission', content: 'Application submitted' },
+          { date: '2025-01-10', type: 'email', content: 'Addtional documents request' }
+        ]
+      }
+      
       
       
 
