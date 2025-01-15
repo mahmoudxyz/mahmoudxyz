@@ -435,7 +435,7 @@ const UniversityTracker = () => {
         country: 'italy',
         city: 'Genova',
         program: 'MEDICAL-PHARMACEUTICAL BIOTECHNOLOGY, M.Sc.',
-        status: 'applied',
+        status: 'rejected',
         applicationFee: 0,
         applicationVia: 'https://servizionline.unige.it/web-studenti2/en/#/v2/preimma/td/5005/anac/2025',
         email: 'enrico.zeraschi@unige.it',

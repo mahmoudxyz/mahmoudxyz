@@ -67,9 +67,9 @@ function App() {
                   <Route
                     path="/uni"
                     element={
-                      <ProtectedRoute>
+
                         <UniversityTracker />
-                      </ProtectedRoute>
+  
                     }
                   />
                   <Route
