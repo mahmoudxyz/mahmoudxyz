@@ -489,7 +489,37 @@ const UniversityTracker = () => {
         ]
       }
       
-      
+      ,
+      {
+        id: 13,
+        name: 'University of Trento',
+        country: 'italy',
+        city: 'Trento',
+        program: 'Quantitative and Computational Biology, M.Sc.',
+        status: 'applied',
+        applicationFee: 34.3,
+        applicationVia: 'https://webapps.unitn.it/Apply/it/Web/Home/master',
+        email: 'master-st@unitn.it',
+        website: 'https://international.unitn.it/mqcb',
+        semesterFee: 1000,
+        deadline: '2025-03-6',
+        starts:  '2024-12-19',
+        documents: [
+          { name: 'Transcript', status: 'ready', deadline: '2024-12-15' },
+          { name: 'CV', status: 'ready', deadline: '2024-12-15' },
+          { name: 'English C1', status: 'ready', deadline: '2024-12-15' }
+        ],
+        applicationDetails: {
+          appliedDate: '2025-1-16',
+          applicationId: '781625',
+          status: 'under_review'
+        },
+        communications: [
+          { date: '2025-01-16', type: 'submission', content: 'Application submitted' },
+          { date: '2025-01-16', type: 'email', content: 'Confirmation email from no-reply' }
+        ]
+      }
+     
       
 
   ];
