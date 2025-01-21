@@ -21,6 +21,8 @@ import { useAuth } from './hooks/useAuth';
 import { HelmetProvider } from 'react-helmet-async';
 import MarkdownEditor from './components/blog/MarkdownEditor.jsx';
 import '@fontsource/noto-sans-arabic/400.css';
+import JSONLCreator from './pages/JSONLCreator.jsx';
+import WorkflowJSONLCreator from './pages/WorkflowJSONLCreator.jsx';
 
 const AuthWrapper = ({ children }) => {
   useAuth(); // This will check token validity periodically
@@ -54,6 +56,9 @@ function App() {
 
                   <Route path="/rpg" element={<CharacterBuilder />} />
                   <Route path="/rpg-preview" element={<CharacterCreator />} />
+                  <Route path="/fine-tune" element={<JSONLCreator />} />
+
+                  <Route path="/worflow-generator" element={<WorkflowJSONLCreator />} />
 
                   {/* Protected routes */}
                   <Route

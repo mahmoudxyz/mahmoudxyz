@@ -168,7 +168,7 @@ const UniversityTracker = () => {
         country: 'germany',
         city: 'Göttingen',
         program: 'Molecular Biology, M.Sc./PhD',
-        status: 'applied',
+        status: 'rejected',
         applicationFee: 0,
         applicationVia: 'gpmolbio2.uni-goettingen.de',
         semesterFee: 0,
@@ -584,7 +584,7 @@ const UniversityTracker = () => {
 
     return {
       applications: {
-        applied: universities.filter(u => u.status === 'applied').length,
+        applied: universities.filter(u => u.status === 'applied' ||  u.status === 'rejected').length,
         accepted: universities.filter(u => u.status === 'accepted').length,
         rejected: universities.filter(u => u.status === 'rejected').length,
         pending: universities.filter(u => u.status === 'pending').length,
