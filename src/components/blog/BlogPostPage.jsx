@@ -78,30 +78,7 @@ const ShareButton = ({ post }) => {
   );
 };
 
-const TableOfContents = ({ headings }) => {
-  return (
-    <nav className="space-y-2">
-      <h3 className="font-semibold mb-4">Table of Contents</h3>
-      <ul className="space-y-2">
-        {headings.map((heading) => (
-          <li
-            key={heading.id}
-            className={`${
-              heading.level === 2 ? 'ml-0' : 'ml-4'
-            }`}
-          >
-            <a
-              href={`#${heading.id}`}
-              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
-            >
-              {heading.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
+
 
 const BlogPostPage = () => {
   const { slug } = useParams();
@@ -270,14 +247,6 @@ const BlogPostPage = () => {
                 {post.content}
               </ReactMarkdown>
             </div>
-
-            {showToC && (
-              <aside className="hidden lg:block">
-                <div className="sticky top-4">
-                  <TableOfContents headings={post.tableOfContents} />
-                </div>
-              </aside>
-            )}
           </div>
         </div>
       </div>
