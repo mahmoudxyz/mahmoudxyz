@@ -23,6 +23,7 @@ import MarkdownEditor from './components/blog/MarkdownEditor.jsx';
 import '@fontsource/noto-sans-arabic/400.css';
 import JSONLCreator from './pages/JSONLCreator.jsx';
 import WorkflowJSONLCreator from './pages/WorkflowJSONLCreator.jsx';
+import RetroPortfolio from './pages/RetroPortfolio.jsx';
 
 const AuthWrapper = ({ children }) => {
   useAuth(); // This will check token validity periodically
@@ -42,7 +43,7 @@ function App() {
               <main className="container mx-auto px-4 py-8">
                 <Routes>
                   {/* Public routes */}
-                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/" element={<RetroPortfolio />} />
                   <Route path="/experience" element={<ExperiencePage />} />
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/watch" element={<VideoWatchPage />} />
