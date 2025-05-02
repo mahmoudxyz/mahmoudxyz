@@ -82,7 +82,7 @@ function RetroPortfolio() {
                 <div className="w-40 h-40 mx-auto md:mx-0 bg-blue-100 border-4 border-blue-300 rounded-full overflow-hidden mb-4">
                   {/* Profile photo would go here */}
                   <div className="w-full h-full flex items-center justify-center bg-blue-200 text-blue-800 font-bold">
-                    PHOTO
+                    <img src='https://media.licdn.com/dms/image/v2/D4D03AQF9hamX9XPW6g/profile-displayphoto-shrink_800_800/B4DZUlW79VG8Ag-/0/1740088526260?e=1751500800&v=beta&t=S48LiF09Q8i4qvIsZvn1Xf821kxEdDccIJueSaf9i6Q' />
                   </div>
                 </div>
               </div>
@@ -266,7 +266,7 @@ function RetroPortfolio() {
               
               <div className="border border-blue-200 bg-blue-50 p-3 rounded">
                 <div className="font-bold text-blue-700 mb-1">Location</div>
-                <div>Hamoul Saied, 33729, Kafr Elshikh, Egypt</div>
+                <div>Kafr Elshikh, Egypt</div>
               </div>
             </div>
           </section>
