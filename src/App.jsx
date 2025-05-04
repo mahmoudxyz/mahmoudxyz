@@ -39,8 +39,8 @@ function App() {
         <Router>
           <AuthWrapper>
             <ScrollToTop />
-            <div className="min-h-screen bg-background">
-              <main className="container mx-auto px-4 py-8">
+            <div>
+              <main >
                 <Routes>
                   {/* Public routes */}
                   <Route path="/" element={<RetroPortfolio />} />
