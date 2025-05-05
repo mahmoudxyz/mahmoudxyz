@@ -24,6 +24,10 @@ import '@fontsource/noto-sans-arabic/400.css';
 import JSONLCreator from './pages/JSONLCreator.jsx';
 import WorkflowJSONLCreator from './pages/WorkflowJSONLCreator.jsx';
 import RetroPortfolio from './pages/RetroPortfolio.jsx';
+import RoadmapComponent from './pages/RoadmapComponent.jsx';
+import LinearAlgebraCalculusRoadmap from './pages/LinearAlgebraCalculusRoadmap.jsx';
+import ItalianA1Roadmap from './pages/ItalianA1Roadmap.jsx';
+import MLAlgorithmsRoadmap from './pages/MLAlgorithmsRoadmap.jsx';
 
 const AuthWrapper = ({ children }) => {
   useAuth(); // This will check token validity periodically
@@ -44,6 +48,10 @@ function App() {
                 <Routes>
                   {/* Public routes */}
                   <Route path="/" element={<RetroPortfolio />} />
+                  <Route path="/stats-roadmap" element={<RoadmapComponent />} />
+                  <Route path="/calc-roadmap" element={<LinearAlgebraCalculusRoadmap />} />
+                  <Route path="/it-roadmap" element={<ItalianA1Roadmap />} />
+                  <Route path="/ml-roadmap" element={<MLAlgorithmsRoadmap />} />
                   <Route path="/experience" element={<ExperiencePage />} />
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/watch" element={<VideoWatchPage />} />
