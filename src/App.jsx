@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Header from './components/Header';
-import LandingPage from './pages/LandingPage';
 import BlogPage from './components/blog/BlogPage';
 import BlogPostPage from './components/blog/BlogPostPage';
 import { LanguageProvider } from './components/contexts/LanguageContext';
@@ -28,6 +26,7 @@ import RoadmapComponent from './pages/RoadmapComponent.jsx';
 import LinearAlgebraCalculusRoadmap from './pages/LinearAlgebraCalculusRoadmap.jsx';
 import ItalianA1Roadmap from './pages/ItalianA1Roadmap.jsx';
 import MLAlgorithmsRoadmap from './pages/MLAlgorithmsRoadmap.jsx';
+import RoadmapHub from './pages/RoadmapHub.jsx';
 
 const AuthWrapper = ({ children }) => {
   useAuth(); // This will check token validity periodically
@@ -48,6 +47,7 @@ function App() {
                 <Routes>
                   {/* Public routes */}
                   <Route path="/" element={<RetroPortfolio />} />
+                  <Route path="/roadmap/home" element={<RoadmapHub />} />
                   <Route path="/stats-roadmap" element={<RoadmapComponent />} />
                   <Route path="/calc-roadmap" element={<LinearAlgebraCalculusRoadmap />} />
                   <Route path="/it-roadmap" element={<ItalianA1Roadmap />} />
