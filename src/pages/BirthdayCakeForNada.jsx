@@ -1,66 +1,135 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Heart, Music, Star, Gift, Coffee, Building2, Cat, Sparkles, Crown, Flame, ChevronDown } from 'lucide-react';
+import { Heart, Music, Star, Gift, Coffee, Building2, Cat, Sparkles, Crown, Flame, ChevronDown, Volume2, VolumeX, Play } from 'lucide-react';
 
-const BirthdayCakeForNada = () => {
-  const [candles, setCandles] = useState([true, true, true]);
-  const [showMessage, setShowMessage] = useState(false);
-  const [confetti, setConfetti] = useState([]);
-  const [currentQuote, setCurrentQuote] = useState(0);
-  const [showCat, setShowCat] = useState(false);
+const StepByStepBirthdayForNada = () => {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [musicPermission, setMusicPermission] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [hearts, setHearts] = useState([]);
-  const [expandedCards, setExpandedCards] = useState({});
-   const audioRef = useRef(null);
+  const [confetti, setConfetti] = useState([]);
+  const [candles, setCandles] = useState([true, true, true]);
+  const [wishMade, setWishMade] = useState(false);
+  const audioRef = useRef(null);
 
-          useEffect(() => {
-            const playPromise = audioRef.current.play();
-            if (playPromise !== undefined) {
-              playPromise.then(() => {
-              }).catch(error => {
-                console.log("Autoplay prevented:", error);
-              });
-            }
-          }, []);
-
-  const quotes = [
-    "يا ملكة البيزنس... كل سنة وإنتِ طيبة 👑",
-    "الامتحانات؟ دي بتبقى سهلة عليكِ زي ما الجمال سهل عليكِ ✨",
-    "شيكو بيقول: مين اللي أحلى منك؟ مفيش! 🐱💅",
-    "مطعمك هيبقى المكان الوحيد اللي الناس تيجي فيه عشان جمالك قبل الأكل ☕💖",
-    "إنتِ مش بس مكافحة... إنتِ ملهمة كل الناس حواليكِ 🌟"
+  const steps = [
+    {
+      id: 'music',
+      component: 'MusicPermission'
+    },
+    {
+      id: 'greeting',
+      text: "💖إزيك يا ندى ",
+      duration: 3000
+    },
+    {
+      id: 'introduction',
+      text: "🌟 النهارده يوم مميز جداً",
+      duration: 3000
+    },
+    {
+      id: 'birthday_reveal',
+      text: "لأنه عيد ميلادك! 🎉",
+      duration: 3000
+    },
+    {
+      id: 'crown',
+      text: "You are queen of business",
+      duration: 3500
+    },
+    {
+      id: 'cake_intro',
+      text: "🎂عملت لك تورته ",
+      duration: 3000
+    },
+    {
+      id: 'cake',
+      component: 'CakeComponent'
+    },
+    {
+      id: 'wish_prompt',
+      text: "الآن... اتمني أمنية حلوة من قلبك 💫",
+      duration: 4000
+    },
+    {
+      id: 'wish_action',
+      component: 'WishComponent'
+    },
+    {
+      id: 'about_you',
+      text: "عايز أقولك حاجة مهمة عنك... ✨",
+      duration: 3500
+    },
+    {
+      id: 'smart',
+      text: "إنتِ ذكية جداً والامتحانات مش صعبة عليكِ 📚",
+      duration: 4000
+    },
+    {
+      id: 'business',
+      text: "ومستقبلك في البيزنس هيبقى مشرق 💼",
+      duration: 4000
+    },
+    {
+      id: 'cafe',
+      text: "مطعمك الكوزي هيبقى أجمل مكان في المدينة ☕",
+      duration: 4000
+    },
+    {
+      id: 'cat_mom',
+      text: "وشيكو محظوظ إن عنده أم حنينة زيك 🐱💕",
+      duration: 4000
+    },
+    {
+      id: 'special',
+      text: "في يومين بس حسيت إنك إنسانة مميزة جداً... 🌟",
+      duration: 4500
+    },
+    {
+      id: 'qualities',
+      text: "مكافحة، جميلة، وعندك أحلام كبيرة 💫",
+      duration: 4000
+    },
+    {
+      id: 'final',
+      component: 'FinalMessage'
+    }
   ];
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentQuote((prev) => (prev + 1) % quotes.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const blowCandle = (index) => {
-    const newCandles = [...candles];
-    newCandles[index] = false;
-    setCandles(newCandles);
-    
-    // Simple confetti
-    const newConfetti = [];
-    for (let i = 0; i < 15; i++) {
-      newConfetti.push({
-        id: Date.now() + i,
-        left: Math.random() * 100,
-        delay: Math.random() * 500,
-        color: ['bg-pink-400', 'bg-purple-400', 'bg-yellow-400'][Math.floor(Math.random() * 3)]
-      });
+    if (currentStep > 0 && currentStep < steps.length - 1 && steps[currentStep].duration) {
+      const timer = setTimeout(() => {
+        setCurrentStep(prev => prev + 1);
+      }, steps[currentStep].duration);
+      return () => clearTimeout(timer);
     }
-    setConfetti(newConfetti);
-    
-    setTimeout(() => setConfetti([]), 2000);
-    
-    if (newCandles.every(candle => !candle)) {
-      setTimeout(() => setShowMessage(true), 1000);
+  }, [currentStep]);
+
+  const handleMusicPermission = async (allowed) => {
+    setMusicPermission(allowed);
+    if (allowed && audioRef.current) {
+      try {
+        await audioRef.current.play();
+        setIsPlaying(true);
+      } catch (error) {
+        console.log("Audio play failed:", error);
+      }
+    }
+    setCurrentStep(1);
+  };
+
+  const toggleMusic = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        audioRef.current.play();
+        setIsPlaying(true);
+      }
     }
   };
 
-  const createHeart = (e) => {
+  const createHearts = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const heart = {
       id: Date.now() + Math.random(),
@@ -73,66 +142,234 @@ const BirthdayCakeForNada = () => {
     }, 2000);
   };
 
-  const toggleCard = (cardId) => {
-    setExpandedCards(prev => ({
-      ...prev,
-      [cardId]: !prev[cardId]
-    }));
-  };
-
-
-    const handleAudioClick = () => {
-    setShowCat(!showCat);
-    if (audioRef.current) {
-      audioRef.current.play().catch((err) => {
-        console.error('Audio play failed:', err);
+  const blowCandle = (index) => {
+    const newCandles = [...candles];
+    newCandles[index] = false;
+    setCandles(newCandles);
+    
+    // Create confetti
+    const newConfetti = [];
+    for (let i = 0; i < 20; i++) {
+      newConfetti.push({
+        id: Date.now() + i,
+        left: Math.random() * 100,
+        delay: Math.random() * 500,
+        color: ['bg-pink-400', 'bg-purple-400', 'bg-yellow-400', 'bg-blue-400'][Math.floor(Math.random() * 4)]
       });
     }
+    setConfetti(newConfetti);
+    
+    setTimeout(() => setConfetti([]), 3000);
+    
+    if (newCandles.every(candle => !candle)) {
+      setTimeout(() => {
+        setCurrentStep(prev => prev + 1);
+      }, 2000);
+    }
   };
 
-  const cardData = [
-    {
-      id: 'cafe',
-      icon: Coffee,
-      title: 'Future Cafe Queen',
-      preview: 'مطعمك الكوزي قريباً...',
-      content: 'تخيلي معايا... مطعم صغير كوزي، ريحة القهوة الحلوة، وإنتِ واقفة تديري كل حاجة بثقة. الناس هتيجي مش بس عشان الأكل، لكن عشان الطاقة الإيجابية اللي بتشعيها. هتبقي الـ سي اي اوه الأجمل في المدينة! ☕👸',
-      color: 'from-amber-100 to-orange-100',
-      iconColor: 'text-amber-600'
-    },
-    {
-      id: 'business',
-      icon: Building2,
-      title: 'Business Genius',
-      preview: 'الامتحانات مش صعبة عليكِ...',
-      content: 'بصراحة، أنا شايفك هتخلصي الامتحانات دي وكأنها لعبة. عندك الذكاء ده والتركيز ده... والاستيراد والتصدير هيبقى مجالك الثاني لو حبيتي. بس أنا متأكد إنك هتنجحي في أي حاجة تحطي دماغك فيها! 📊💼',
-      color: 'from-blue-100 to-indigo-100',
-      iconColor: 'text-blue-600'
-    },
-    {
-      id: 'cat',
-      icon: Cat,
-      title: 'Cat Mom Extraordinaire',
-      preview: 'شيكو وعيلة القطط...',
-      content: 'شيكو محظوظ جداً إن عنده أم زيك! حتى لما بيعمل مشاكل وخناقات مع باقي القطط، إنتِ صبورة معاه وبتحبيه. ده يدل على قلبك الطيب وإنك هتبقي أم عظيمة في المستقبل (إن شاء الله) 🐱💖',
-      color: 'from-orange-100 to-red-100',
-      iconColor: 'text-orange-600'
-    }
-  ];
+  const makeWish = () => {
+    setWishMade(true);
+    setTimeout(() => {
+      setCurrentStep(prev => prev + 1);
+    }, 3000);
+  };
+
+  const MusicPermission = () => (
+    <div className="text-center space-y-8">
+      <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full w-32 h-32 mx-auto flex items-center justify-center animate-pulse">
+        <Music className="w-16 h-16 text-white" />
+      </div>
+      <div className="space-y-6">
+        <h2 className="text-4xl font-bold text-gray-800 mb-4">
+          🎵 أضيف موسيقى لطيفة؟ 🎵
+        </h2>
+        <p className="text-xl text-gray-600 leading-relaxed">
+          عندي أغنية حلوة هتخلي التجربة أجمل... 
+          <br />
+          ممكن أشغلها؟
+        </p>
+        <div className="flex gap-6 justify-center mt-8">
+          <button
+            onClick={() => handleMusicPermission(true)}
+            className="bg-gradient-to-r from-green-400 to-green-600 text-white px-8 py-4 rounded-xl text-xl font-bold hover:scale-105 transition-transform shadow-lg"
+          >
+            ✅ أيوة، شغلها!
+          </button>
+          <button
+            onClick={() => handleMusicPermission(false)}
+            className="bg-gradient-to-r from-gray-400 to-gray-600 text-white px-8 py-4 rounded-xl text-xl font-bold hover:scale-105 transition-transform shadow-lg"
+          >
+            ❌ لا، شكراً
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  const CakeComponent = () => (
+    <div className="text-center space-y-8">
+      <div className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-3xl p-12 shadow-2xl border-4 border-pink-200 max-w-md mx-auto">
+        <div className="relative flex flex-col items-center">
+          {/* Candles */}
+          <div className="flex justify-center gap-6 mb-4">
+            {candles.map((lit, index) => (
+              <div key={index} className="relative">
+                <div 
+                  className="w-3 h-12 bg-gradient-to-t from-blue-500 to-blue-300 rounded-sm cursor-pointer hover:scale-110 transition-transform shadow-lg"
+                  onClick={() => blowCandle(index)}
+                >
+                  {lit && (
+                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                      <div className="w-3 h-4 bg-orange-400 rounded-full "></div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Cake Tiers */}
+          <div className="w-24 h-10 bg-gradient-to-t from-purple-400 to-purple-200 rounded-2xl shadow-lg mb-2 relative">
+            <div className="absolute top-3 left-1/2 transform -translate-x-1/2 w-4 h-2 bg-white rounded-full"></div>
+          </div>
+          
+          <div className="w-32 h-12 bg-gradient-to-t from-pink-400 to-pink-200 rounded-2xl shadow-lg mb-2 relative">
+            <div className="absolute top-3 left-4 w-4 h-3 bg-yellow-400 rounded-full"></div>
+            <div className="absolute top-3 right-4 w-4 h-3 bg-purple-400 rounded-full"></div>
+          </div>
+          
+          <div className="w-40 h-14 bg-gradient-to-t from-yellow-400 to-yellow-200 rounded-2xl shadow-lg relative">
+            <div className="absolute top-4 left-6 w-5 h-3 bg-red-400 rounded-full"></div>
+            <div className="absolute top-4 right-6 w-5 h-3 bg-blue-400 rounded-full"></div>
+            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-5 h-3 bg-green-400 rounded-full"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="text-2xl font-bold text-gray-700 animate-bounce">
+        🎂 انفخي الشموع! 🎂
+      </div>
+      
+      {candles.every(c => !c) && (
+        <div className="text-3xl font-bold text-purple-600 animate-pulse">
+          🎉 كل سنة وإنتِ طيبة! 🎉
+        </div>
+      )}
+    </div>
+  );
+
+  const WishComponent = () => (
+    <div className="text-center space-y-8">
+      {!wishMade ? (
+        <>
+          <div className="text-6xl animate-bounce">⭐</div>
+          <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-8 max-w-lg mx-auto border-2 border-purple-200">
+            <h3 className="text-3xl font-bold text-gray-800 mb-6">اتمني أمنية!</h3>
+            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+              اقفلي عينك واتمني امنيه
+              <br />
+              وبعدين اضغطي  ⭐
+            </p>
+            <button
+              onClick={makeWish}
+              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-12 py-6 rounded-2xl text-2xl font-bold hover:scale-105 transition-transform shadow-xl animate-pulse"
+            >
+              ⭐ تمنيت! ⭐
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="space-y-6">
+          <div className="text-6xl animate-spin">✨</div>
+          <div className="bg-gradient-to-br from-green-100 to-blue-100 rounded-2xl p-8 max-w-lg mx-auto border-2 border-green-200">
+            <h3 className="text-3xl font-bold text-green-700 mb-4"> 💫</h3>
+            <p className="text-xl text-gray-700 leading-relaxed">
+              كنت هقولك إن أمنيتك هتتحقق...
+              <br />
+              بس مش هقول كده
+              <br />
+              <span className="font-bold text-purple-600">
+                عايز أقولك حاجة أحلى! ✨
+              </span>
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
+  const FinalMessage = () => (
+    <div className="text-center space-y-8">
+      <Crown className="w-16 h-16 text-yellow-500 mx-auto animate-bounce" />
+      <div className="bg-gradient-to-br from-pink-500 to-purple-600 rounded-3xl p-12 shadow-2xl text-white max-w-2xl mx-auto">
+        <Gift className="w-16 h-16 mx-auto mb-6 animate-pulse" />
+        <div className="space-y-6 text-xl leading-relaxed">
+          <p>إنتِ إنسانة مميزة، ذكية، جميلة، ومكافحة</p>
+          <p>وأنا متأكد إن كل حلم عندك هيتحقق</p>
+          <div className="bg-white/20 rounded-2xl p-6 mt-8">
+            <p className="text-2xl font-bold text-yellow-200">
+              كل سنة وأنت طيبة وتحققي كل احلامك واتمنالك 100 سنة سعيده محققه فيها كل أحلامك
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+        <div className="bg-gradient-to-br from-amber-100 to-orange-100 rounded-xl p-6 border-2 border-amber-200">
+          <Coffee className="w-12 h-12 text-amber-600 mx-auto mb-4" />
+          <h4 className="font-bold text-gray-800 text-lg">Future Cafe Queen</h4>
+          <p className="text-sm text-gray-700 mt-2">مطعمك هيبقى أجمل مكان! ☕👸</p>
+        </div>
+        
+        <div className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl p-6 border-2 border-blue-200">
+          <Building2 className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+          <h4 className="font-bold text-gray-800 text-lg">Business Genius</h4>
+          <p className="text-sm text-gray-700 mt-2">الامتحانات سهلة عليكِ! 📊💼</p>
+        </div>
+        
+        <div className="bg-gradient-to-br from-orange-100 to-red-100 rounded-xl p-6 border-2 border-orange-200">
+          <Cat className="w-12 h-12 text-orange-600 mx-auto mb-4" />
+          <h4 className="font-bold text-gray-800 text-lg">Cat Mom</h4>
+          <p className="text-sm text-gray-700 mt-2">شيكو محظوظ بيكِ! 🐱💖</p>
+        </div>
+      </div>
+
+      <div className="mt-8 p-4 bg-white/80 rounded-xl">
+        <p className="text-lg text-gray-700">
+          💕 دوسي في أي حتة علشان القلوب تطير 💕
+        </p>
+      </div>
+    </div>
+  );
+
+  const currentStepData = steps[currentStep];
 
   return (
     <div 
-      className="min-h-screen bg-gradient-to-br from-rose-100 via-pink-50 to-purple-100 overflow-hidden relative"
-      onClick={createHeart}
+      className="min-h-screen bg-gradient-to-br from-rose-100 via-pink-50 to-purple-100 overflow-hidden relative flex items-center justify-center p-4"
+      onClick={createHearts}
     >
+      {/* Audio */}
+      <audio ref={audioRef} loop>
+        <source src="src\assets\sam.mp3" />
+      </audio>
 
+      {/* Music Control */}
+      {musicPermission !== null && (
+        <button
+          onClick={toggleMusic}
+          className="fixed top-6 right-6 bg-white/80 backdrop-blur-sm rounded-full p-3 shadow-lg hover:scale-110 transition-transform z-20"
+        >
+          {isPlaying ? <Volume2 className="w-6 h-6 text-purple-600" /> : <VolumeX className="w-6 h-6 text-gray-600" />}
+        </button>
+      )}
 
-
-      {/* Simple floating hearts */}
+      {/* Hearts Animation */}
       {hearts.map(heart => (
         <div
           key={heart.id}
-          className="absolute pointer-events-none z-20"
+          className="absolute pointer-events-none z-10"
           style={{
             left: heart.x,
             top: heart.y,
@@ -143,227 +380,38 @@ const BirthdayCakeForNada = () => {
         </div>
       ))}
 
-      {/* Simple confetti */}
+      {/* Confetti */}
       {confetti.map(piece => (
         <div
           key={piece.id}
-          className={`absolute top-0 w-2 h-2 ${piece.color} rounded-full`}
+          className={`absolute top-0 w-3 h-3 ${piece.color} rounded-full z-10`}
           style={{
             left: `${piece.left}%`,
-            animation: `fall 2s ease-in forwards`,
+            animation: `fall 3s ease-in forwards`,
             animationDelay: `${piece.delay}ms`
           }}
         />
       ))}
 
-      <audio ref={audioRef} src="src/assets/sam.mp3" controls={false} />
-      
-      <div
-        className="fixed bottom-6 left-6 cursor-pointer transition-transform duration-300 hover:scale-110 z-10"
-        onClick={handleAudioClick}
-      >
-        <div className="relative">
-          <Cat className="w-14 h-14 text-orange-500" />
-          <div className="text-sm text-center mt-1 font-bold text-orange-600">شيكو</div>
-          {showCat && (
-            <div className="absolute -top-8 -right-2 bg-white rounded-lg px-2 py-1 text-xs shadow-lg">
-              مواء! 😻
-            </div>
-          )}
-        </div>
-      </div>
-
-
-      <div className="container mx-auto px-4 py-8 flex flex-col items-center justify-center min-h-screen max-w-4xl">
+      {/* Main Content */}
+      <div className="max-w-4xl mx-auto">
+        {currentStepData.component === 'MusicPermission' && <MusicPermission />}
+        {currentStepData.component === 'CakeComponent' && <CakeComponent />}
+        {currentStepData.component === 'WishComponent' && <WishComponent />}
+        {currentStepData.component === 'FinalMessage' && <FinalMessage />}
         
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="mb-4">
-            <Crown className="w-10 h-10 text-yellow-500 mx-auto" />
-          </div>
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-4">
-           عيد سعيد يا ندى
-          </h1>
-          <div className="flex items-center justify-center gap-3 text-xl text-gray-700 font-semibold">
-            <Sparkles className="w-6 h-6 text-yellow-500" />
-            <span>ندى... الجميلة الذكية المكافحة</span>
-            <Sparkles className="w-6 h-6 text-yellow-500" />
-          </div>
-        </div>
-
-        {/* Redesigned Birthday Cake */}
-        <div className="relative mb-10">
-          <div className="bg-gradient-to-b from-pink-50 to-rose-100 rounded-3xl p-8 shadow-xl border-2 border-pink-200">
-            {/* Cake Structure */}
-            <div className="relative flex flex-col items-center">
-              
-              {/* Bottom Tier - Large */}
-
-
-
-              {/* Candles - Properly positioned on top */}
-              <div className="flex justify-center gap-4 -mt-6">
-                {candles.map((lit, index) => (
-                  <div key={index} className="relative">
-                    <div 
-                      className="w-2 h-8 bg-gradient-to-t from-blue-400 to-blue-200 rounded-sm cursor-pointer hover:scale-110 transition-transform shadow-sm"
-                      onClick={() => blowCandle(index)}
-                    >
-                      {lit && (
-                        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                          <div className="w-2 h-3 bg-orange-400 rounded-full opacity-80"></div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-             {/* Top Tier - Small */}
-              <div className="relative mb-1">
-                <div className="w-20 h-8 bg-gradient-to-t from-purple-400 to-purple-200 rounded-2xl shadow-lg relative">
-                  {/* Decorations on top tier */}
-                  <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-3 h-2 bg-white rounded-full"></div>
-                  {/* Cake edge */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-purple-400 rounded-b-2xl"></div>
-                </div>
-              </div>
-
-           {/* Middle Tier - Medium */}
-              <div className="relative mb-1">
-                <div className="w-28 h-10 bg-gradient-to-t from-pink-400 to-pink-200 rounded-2xl shadow-lg relative">
-                  {/* Decorations on middle tier */}
-                  <div className="absolute top-2 left-3 w-3 h-2 bg-purple-400 rounded-full"></div>
-                  <div className="absolute top-2 right-3 w-3 h-2 bg-yellow-400 rounded-full"></div>
-                  {/* Cake edge */}
-                  <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-pink-500 to-pink-400 rounded-b-2xl"></div>
-                </div>
-              </div>
-
-
-
-               <div className="relative mb-1">
-                <div className="w-36 h-12 bg-gradient-to-t from-yellow-400 to-yellow-200 rounded-2xl shadow-lg relative">
-                  {/* Decorations on bottom tier */}
-                  <div className="absolute top-2 left-4 w-4 h-2 bg-red-400 rounded-full"></div>
-                  <div className="absolute top-2 right-4 w-4 h-2 bg-blue-400 rounded-full"></div>
-                  <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-4 h-2 bg-green-400 rounded-full"></div>
-                  {/* Cake edge */}
-                  <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-b-2xl"></div>
-                </div>
-              </div>
-
-            </div>
-            
-            <p className="text-center mt-2 text-gray-700 font-medium">
-              انفخي الشموع واتمني أمنية حلوة! 🕯️
-            </p>
-          </div>
-        </div>
-
-        {/* Quotes */}
-        <div className="mb-10 max-w-2xl">
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl px-6 py-4 shadow-lg border border-pink-100">
-            <p className="text-lg text-gray-800 text-center transition-all duration-500">
-              {quotes[currentQuote]}
-            </p>
-          </div>
-        </div>
-
-        {/* Special Message */}
-        {showMessage && (
-          <div className="bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl p-6 shadow-xl text-white text-center max-w-lg mx-4 mb-8">
-            <Gift className="w-12 h-12 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold mb-4">🎁 المفاجأة الكبيرة! 🎁</h3>
-            <div className="text-base leading-relaxed space-y-3">
-              <p>يا ندى الجميلة... إنتِ مش مجرد صديقة عادية 💖</p>
-              <p>في يومين بس حسيت إنك إنسانة مميزة جداً، ذكية، مكافحة، وعندك أحلام كبيرة</p>
-              <p className="font-bold text-yellow-200">
-                كل سنة وإنتِ أحلى هدية في الدنيا ✨
+        {currentStepData.text && (
+          <div className="text-center">
+            <div className="bg-white/90 backdrop-blur-sm rounded-3xl px-12 py-8 shadow-2xl border-2 border-pink-200 inline-block max-w-3xl">
+              <p className="text-4xl md:text-5xl font-bold text-gray-800 leading-relaxed animate-pulse">
+                {currentStepData.text}
               </p>
             </div>
           </div>
         )}
-
-        {/* Interactive Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
-          {cardData.map((card) => {
-            const Icon = card.icon;
-            const isExpanded = expandedCards[card.id];
-            
-            return (
-              <div 
-                key={card.id}
-                className={`bg-gradient-to-br ${card.color} rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer border border-white/50`}
-                onClick={() => toggleCard(card.id)}
-              >
-                <div className="text-center">
-                  <Icon className={`w-12 h-12 mx-auto mb-4 ${card.iconColor}`} />
-                  <h3 className="font-bold text-gray-800 text-lg mb-2">{card.title}</h3>
-                  
-                  {!isExpanded ? (
-                    <div>
-                      <p className="text-gray-600 text-sm mb-3">{card.preview}</p>
-                      <div className="flex items-center justify-center text-gray-500 text-xs">
-                        <span>اضغط للمزيد</span>
-                        <ChevronDown className="w-4 h-4 ml-1" />
-                      </div>
-                    </div>
-                  ) : (
-                    <div>
-                      <p className="text-gray-700 text-sm leading-relaxed">{card.content}</p>
-                      <div className="flex items-center justify-center text-gray-500 text-xs mt-3">
-                        <span>اضغط للإخفاء</span>
-                        <ChevronDown className="w-4 h-4 ml-1 transform rotate-180" />
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Footer */}
-        <div className="mt-12 text-center space-y-4">
-          <div className="flex justify-center items-center gap-4">
-            <Heart className="w-6 h-6 text-red-500 fill-current" />
-            <p className="text-gray-700 font-semibold text-lg">
-              كل سنة وإنتِ أجمل وأذكى وأقوى! 
-            </p>
-            <Heart className="w-6 h-6 text-red-500 fill-current" />
-          </div>
-          <p className="text-sm text-gray-500 bg-white/50 rounded-lg px-4 py-2 inline-block">
-            💕 دوسي في أي حتة علشان القلوب تطير 💕
-          </p>
-        </div>
       </div>
-
-      <style jsx>{`
-        @keyframes float-up {
-          0% {
-            transform: translateY(0) scale(0);
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(-80px) scale(1);
-            opacity: 0;
-          }
-        }
-        
-        @keyframes fall {
-          0% {
-            transform: translateY(-100vh) rotate(0deg);
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(100vh) rotate(360deg);
-            opacity: 0;
-          }
-        }
-      `}</style>
     </div>
   );
 };
 
-export default BirthdayCakeForNada;
+export default StepByStepBirthdayForNada;
