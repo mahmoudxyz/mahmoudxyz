@@ -27,6 +27,7 @@ import LinearAlgebraCalculusRoadmap from './pages/LinearAlgebraCalculusRoadmap.j
 import ItalianA1Roadmap from './pages/ItalianA1Roadmap.jsx';
 import MLAlgorithmsRoadmap from './pages/MLAlgorithmsRoadmap.jsx';
 import RoadmapHub from './pages/RoadmapHub.jsx';
+import BirthdayCakeForNada from './pages/BirthdayCakeForNada.jsx';
 
 const AuthWrapper = ({ children }) => {
   useAuth(); // This will check token validity periodically
@@ -56,6 +57,8 @@ function App() {
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/watch" element={<VideoWatchPage />} />
                   <Route path="/login" element={<LoginPage />} />
+                   <Route path="/nada" element={<BirthdayCakeForNada />} />
+
 
                   <Route path="/blog" element={<BlogPage />} />
                   <Route path="/blog/editor" element={<MarkdownEditor />} />
