@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Heart, Music, Star, Gift, Coffee, Building2, Cat, Sparkles, Crown, Flame, ChevronDown, Volume2, VolumeX, Play } from 'lucide-react';
 
+import audio  from "../assets/sam.mp3"
 const StepByStepBirthdayForNada = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [musicPermission, setMusicPermission] = useState(null);
@@ -10,6 +11,7 @@ const StepByStepBirthdayForNada = () => {
   const [candles, setCandles] = useState([true, true, true]);
   const [wishMade, setWishMade] = useState(false);
   const audioRef = useRef(null);
+  
 
   const steps = [
     {
@@ -354,7 +356,7 @@ const StepByStepBirthdayForNada = () => {
     >
       {/* Audio */}
       <audio ref={audioRef} loop>
-        <source src="src\assets\sam.mp3" />
+        <source src={audio} />
       </audio>
 
       {/* Music Control */}
