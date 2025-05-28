@@ -105,16 +105,18 @@ const StepByStepBirthdayForNada = () => {
   }, [currentStep]);
 
   const handleMusicPermission = async (allowed) => {
-    setMusicPermission(allowed);
     if (allowed && audioRef.current) {
       try {
         await audioRef.current.play();
+            setMusicPermission(allowed);
+    setCurrentStep(1);
         setIsPlaying(true);
       } catch (error) {
         console.log("Audio play failed:", error);
+            setCurrentStep(1);
+
       }
     }
-    setCurrentStep(1);
   };
 
   const toggleMusic = () => {
